@@ -1,0 +1,34 @@
+/* Reset some default styles for better cross-browser consistency */
+body, h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Apply a basic font and background color to the entire page */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Style the heading elements */
+h1 {
+  color: #007bff; /* Blue color */
+}
+
+h2 {
+  color: #009688; /* Teal color */
+}
+
+/* Style paragraphs */
+p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Add some padding and center content in a container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}

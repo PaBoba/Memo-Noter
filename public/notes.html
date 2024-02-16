@@ -4,8 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memo Noter</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  
+  <header class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Memo Noter</a>
+    </div>
+  </header>
+  <main class="container mt-4">
+    <section id="existing-notes">
+      <h2>Existing Notes</h2>
+      <ul id="notes-list"></ul>
+    </section>
+    <section id="new-note">
+      <h2>New Note</h2>
+      <form id="note-form">
+        <label for="note-title">Title:</label>
+        <input type="text" id="note-title" name="title" required>
+
+        <label for="note-text">Text:</label>
+        <textarea id="note-text" name="text" required></textarea>
+
+        <div id="buttons">
+          <button type="button" class="btn btn-primary" id="save-note">Save Note</button>
+          <button type="button" class="btn btn-secondary" id="clear-form">Clear Form</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  <script src="/public/assets/js/index.js"></script>
 </body>
 </html>
