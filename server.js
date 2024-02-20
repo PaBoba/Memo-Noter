@@ -12,11 +12,16 @@ app.use(express.urlencoded({ extended: true }));
 // middleware to serve static files
 app.use(express.static("public"));
 
-app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "/public/index.html"))
-);
+// GET request for homepage
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
 
-// GET request for reviews
+app.get("/notes", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
+});
+
+// GET request for notes
 app.get("api/notes", (req, res) => {
   // Log that a GET request was received
   console.log("GET /api/notes request received");
@@ -26,9 +31,29 @@ app.get("api/notes", (req, res) => {
     err ? console.error(err) : res.json(JSON.parse(data))
   );
 });
-// POST request to add a review
-app.post("/api/reviews", (req, res) => {
-  // Log that a POST request was received
+// Post request for notes
+app.post("/api/notes", (req, res) => {
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+    }
+
+    const notes = JSON.parse(data);
+    const newNote = req.body;
+    newNote.id = uuidv4(); // Assign a unique ID to the new note
+    notes.push(newNote);
+
+    fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal server error" });
+        return;
+      }
+      res.json(newNote);
+    });
+  });
 });
 
 app.listen(PORT, () =>
