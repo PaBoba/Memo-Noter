@@ -42,7 +42,7 @@ app.post("/api/notes", (req, res) => {
 
     const notes = JSON.parse(data);
     const newNote = req.body;
-    newNote.id = uuidv4(); // Assign a unique ID to the new note
+    newNote.id = generateUniqueId(); // Assign a unique ID to the new note
     notes.push(newNote);
 
     fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
@@ -52,6 +52,30 @@ app.post("/api/notes", (req, res) => {
         return;
       }
       res.json(newNote);
+    });
+  });
+});
+
+app.delete("/api/notes/:id", (req, res) => {
+  const noteId = req.params.id;
+
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+    }
+
+    let notes = JSON.parse(data);
+    const updatedNotes = notes.filter((note) => note.id !== noteId);
+
+    fs.writeFile("./db/db.json", JSON.stringify(updatedNotes), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal server error" });
+        return;
+      }
+      res.status(200).json({ message: "Note deleted successfully" });
     });
   });
 });
