@@ -61,6 +61,7 @@ app.post("/api/notes", (req, res) => {
 });
 
 app.delete("/api/notes/:id", (req, res) => {
+  console.log("DELETE /api/notes/:id request received");
   const noteId = req.params.id;
 
   fs.readFile("./db/db.json", "utf8", (err, data) => {
