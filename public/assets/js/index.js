@@ -4,7 +4,7 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-
+console.log("index.js is running");
 if (window.location.pathname === "/notes") {
   noteForm = document.querySelector(".note-form");
   noteTitle = document.querySelector(".note-title");
@@ -117,6 +117,7 @@ const handleNewNoteView = (e) => {
 
 // Renders the appropriate buttons based on the state of the form
 const handleRenderBtns = () => {
+  console.log("rendering buttons");
   show(clearBtn);
   if (!noteTitle.value.trim() && !noteText.value.trim()) {
     hide(clearBtn);
@@ -129,10 +130,10 @@ const handleRenderBtns = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
+  console.log("notes are being rendered");
   let jsonNotes = await notes.json();
   if (window.location.pathname === "/notes") {
     noteList.forEach((el) => (el.innerHTML = ""));
-    console.log("jsonNotes", jsonNotes);
   }
 
   let noteListItems = [];
