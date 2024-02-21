@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 
 const PORT = 3001;
+const HOST = "0.0.0.0";
 
 const app = express();
 
@@ -96,6 +97,4 @@ app.get("/notes", (req, res) => {
   console.log("notes.html is running");
 });
 
-app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT}`)
-);
+app.listen(PORT, HOST, () => console.log(`App listening at ${HOST}:${PORT}`));
